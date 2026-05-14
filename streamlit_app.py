@@ -215,26 +215,31 @@ TOOLS = [
 # ---------------------------------------------------------------------------
 # Card grid — 2 columns
 # ---------------------------------------------------------------------------
+def render_card(tool: dict) -> str:
+    """Build a tool card as a single flat HTML string (no leading whitespace).
+
+    Streamlit's markdown parser bails out of HTML-block mode on any
+    whitespace-only line, so the entire card must be emitted without
+    indentation or blank gaps.
+    """
+    badge = (
+        f'<div class="tool-badge">{tool["badge"]}</div>' if tool["badge"] else ""
+    )
+    return (
+        '<div class="tool-card">'
+        f'{badge}'
+        f'<div class="tool-icon">{tool["icon"]}</div>'
+        f'<div class="tool-title">{tool["title"]}</div>'
+        f'<div class="tool-desc">{tool["desc"]}</div>'
+        f'<a class="tool-btn" href="{tool["url"]}" target="_blank" rel="noopener">Open Tool →</a>'
+        '</div>'
+    )
+
+
 cols = st.columns(2, gap="medium")
 for idx, tool in enumerate(TOOLS):
     with cols[idx % 2]:
-        badge_html = (
-            f'<div class="tool-badge">{tool["badge"]}</div>' if tool["badge"] else ""
-        )
-        st.markdown(
-            f"""
-            <div class="tool-card">
-                {badge_html}
-                <div class="tool-icon">{tool["icon"]}</div>
-                <div class="tool-title">{tool["title"]}</div>
-                <div class="tool-desc">{tool["desc"]}</div>
-                <a class="tool-btn" href="{tool["url"]}" target="_blank" rel="noopener">
-                    Open Tool →
-                </a>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.markdown(render_card(tool), unsafe_allow_html=True)
 
 # ---------------------------------------------------------------------------
 # Footer
