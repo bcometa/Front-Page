@@ -1,15 +1,19 @@
 """
 $300 Data Recovery — Internal Tools Hub
+
 Single landing page that links to all internal Streamlit tools and the
 Tailscale-only PC-3000 manual Q&A server.
 """
+
 import streamlit as st
+
 st.set_page_config(
     page_title="$300 Data Recovery — Tools",
     page_icon="🛠️",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
+
 # ---------------------------------------------------------------------------
 # Custom CSS — 300DDR brand red on dark background
 # ---------------------------------------------------------------------------
@@ -20,15 +24,18 @@ st.markdown(
         #MainMenu { visibility: hidden; }
         footer { visibility: hidden; }
         header { visibility: hidden; }
+
         .stApp {
             background: #0d0d0d;
             color: #f5f5f5;
         }
+
         .block-container {
             padding-top: 2rem;
             padding-bottom: 4rem;
             max-width: 1180px;
         }
+
         /* Hero ---------------------------------------------------------- */
         .hero {
             text-align: center;
@@ -56,6 +63,7 @@ st.markdown(
             text-transform: uppercase;
             letter-spacing: 3px;
         }
+
         /* Cards --------------------------------------------------------- */
         .tool-card {
             position: relative;
@@ -123,6 +131,45 @@ st.markdown(
         .tool-btn:hover {
             filter: brightness(1.1);
         }
+
+        /* Section headers ---------------------------------------------- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin: 2.25rem 0 1.1rem 0;
+            padding-bottom: 0.55rem;
+            border-bottom: 1px solid #262626;
+        }
+        .section-header:first-of-type {
+            margin-top: 0.5rem;
+        }
+        .section-header .section-accent {
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background: linear-gradient(135deg, #EE2400 0%, #B81A00 100%);
+            border-radius: 2px;
+        }
+        .section-header .section-count {
+            margin-left: auto;
+            font-size: 0.75rem;
+            color: #888;
+            letter-spacing: 1.5px;
+        }
+
+        /* Responsive card grid ----------------------------------------- */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+        }
+
         /* Footer -------------------------------------------------------- */
         .footer-note {
             text-align: center;
@@ -143,6 +190,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 # ---------------------------------------------------------------------------
 # Hero
 # ---------------------------------------------------------------------------
@@ -155,67 +203,88 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 # ---------------------------------------------------------------------------
-# Tool definitions
+# Tool definitions — grouped by manufacturer
 # ---------------------------------------------------------------------------
-TOOLS = [
+SECTIONS = [
     {
-        "icon": "🧬",
-        "title": "Seagate Translator Repair",
-        "desc": (
-            "Repairs corrupt translator and NRGL modules from Seagate F3 hard "
-            "drives — 4 documented repair modes plus checksum recompute."
-        ),
-        "url": "https://repair-seagate-translator-b8w4vxafqgkofkvzat8ps6.streamlit.app/",
-        "badge": None,
+        "name": "Seagate",
+        "tools": [
+            {
+                "icon": "🧬",
+                "title": "Translator Repair",
+                "desc": (
+                    "Repairs corrupt translator and NRGL modules on Seagate F3 "
+                    "drives — 4 documented repair modes plus checksum recompute."
+                ),
+                "url": "https://repair-seagate-translator-b8w4vxafqgkofkvzat8ps6.streamlit.app/",
+                "badge": None,
+            },
+            {
+                "icon": "🧠",
+                "title": "ROM Repair Tool",
+                "desc": "Repairs and validates corrupt Seagate ROM dumps.",
+                "url": "https://seagate-rom-repair-tool-qqrqzebbm9qivsbjzrwttp.streamlit.app/",
+                "badge": None,
+            },
+            {
+                "icon": "🧩",
+                "title": "1D1 / 1D2 Module Repair",
+                "desc": "Repairs corrupt 1D1 and 1D2 firmware modules on Seagate drives.",
+                "url": "https://seagate-1d1-1d2-module-repair-jrseycqyzx2hfborcvdgyl.streamlit.app/",
+                "badge": None,
+            },
+        ],
     },
     {
-        "icon": "🔀",
-        "title": "Module Compare & Merge",
-        "desc": (
-            "Compares two copies of a firmware module sector-by-sector, merges "
-            "good sectors, zero-fills sectors that are DEAD in both — ZIP "
-            "upload, smart A/B detection, color hex viewer."
-        ),
-        "url": "https://module-merger-rhwf7v6c4rvpyck25ftgyh.streamlit.app/",
-        "badge": None,
+        "name": "Western Digital",
+        "tools": [
+            {
+                "icon": "🗺️",
+                "title": "Head Map Editor",
+                "desc": (
+                    "View and edit head maps for Western Digital drives — "
+                    "slider, custom offset, hex viewer."
+                ),
+                "url": "https://wd-head-map-editor-fo3bdxohj8kya9merknaq7.streamlit.app/",
+                "badge": None,
+            },
+        ],
     },
     {
-        "icon": "💾",
-        "title": "WD Head Map Editor",
-        "desc": (
-            "View and edit head maps for Western Digital drives — slider, "
-            "custom offset, hex viewer."
-        ),
-        "url": "https://wd-head-map-editor-fo3bdxohj8kya9merknaq7.streamlit.app/",
-        "badge": None,
-    },
-    {
-        "icon": "📋",
-        "title": "ACE Report Converter",
-        "desc": (
-            "Converts ACE Lab reports into clean, customer-ready formatting "
-            "with Slack upload built in."
-        ),
-        "url": "https://300ddr-acerep-proceappr-seqw4mzydzw7vh2uwnyt4t.streamlit.app/",
-        "badge": None,
-    },
-    {
-        "icon": "📖",
-        "title": "PC-3000 Manual Q&A",
-        "desc": (
-            "Ask questions about the PC-3000 manuals directly. Runs locally on "
-            "the shop network — requires Tailscale to access."
-        ),
-        "url": "http://plex:8400/",
-        "badge": "Tailscale required",
+        "name": "General",
+        "tools": [
+            {
+                "icon": "📋",
+                "title": "ACE Report Converter",
+                "desc": (
+                    "Converts ACE Lab reports into clean, customer-ready "
+                    "formatting with Slack upload built in."
+                ),
+                "url": "https://300ddr-acerep-proceappr-seqw4mzydzw7vh2uwnyt4t.streamlit.app/",
+                "badge": None,
+            },
+            {
+                "icon": "📖",
+                "title": "PC-3000 Manual Q&A",
+                "desc": (
+                    "Ask questions about the PC-3000 manuals directly. Runs "
+                    "locally on the shop network — requires Tailscale to access."
+                ),
+                "url": "http://plex:8400/",
+                "badge": "Tailscale required",
+            },
+        ],
     },
 ]
+
 # ---------------------------------------------------------------------------
-# Card grid — 2 columns
+# Render — manufacturer sections + responsive card grid
 # ---------------------------------------------------------------------------
 def render_card(tool: dict) -> str:
     """Build a tool card as a single flat HTML string (no leading whitespace).
+
     Streamlit's markdown parser bails out of HTML-block mode on any
     whitespace-only line, so the entire card must be emitted without
     indentation or blank gaps.
@@ -232,10 +301,25 @@ def render_card(tool: dict) -> str:
         f'<a class="tool-btn" href="{tool["url"]}" target="_blank" rel="noopener">Open Tool →</a>'
         '</div>'
     )
-cols = st.columns(2, gap="medium")
-for idx, tool in enumerate(TOOLS):
-    with cols[idx % 2]:
-        st.markdown(render_card(tool), unsafe_allow_html=True)
+
+
+def render_section(section: dict) -> str:
+    count = len(section["tools"])
+    label = "tool" if count == 1 else "tools"
+    cards = "".join(render_card(t) for t in section["tools"])
+    return (
+        '<div class="section-header">'
+        '<span class="section-accent"></span>'
+        f'<span>{section["name"]}</span>'
+        f'<span class="section-count">{count} {label}</span>'
+        '</div>'
+        f'<div class="tool-grid">{cards}</div>'
+    )
+
+
+for section in SECTIONS:
+    st.markdown(render_section(section), unsafe_allow_html=True)
+
 # ---------------------------------------------------------------------------
 # Footer
 # ---------------------------------------------------------------------------
