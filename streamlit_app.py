@@ -209,6 +209,42 @@ st.markdown(
 # ---------------------------------------------------------------------------
 SECTIONS = [
     {
+        "name": "General",
+        "tools": [
+            {
+                "icon": "🔀",
+                "title": "Module Repair Tool",
+                "desc": (
+                    "Compares two binary dumps, merges non-DEAD sectors, and "
+                    "zero-fills double-DEAD sectors (512-byte). DEAD = a full "
+                    "sector of DE AD DE AD ..."
+                ),
+                "url": "https://module-merger-rhwf7v6c4rvpyck25ftgyh.streamlit.app/",
+                "badge": None,
+            },
+            {
+                "icon": "📋",
+                "title": "ACE Report Converter",
+                "desc": (
+                    "Converts ACE Lab reports into clean, customer-ready "
+                    "formatting with Slack upload built in."
+                ),
+                "url": "https://300ddr-acerep-proceappr-seqw4mzydzw7vh2uwnyt4t.streamlit.app/",
+                "badge": None,
+            },
+            {
+                "icon": "📖",
+                "title": "PC-3000 Manual Q&A",
+                "desc": (
+                    "Ask questions about the PC-3000 manuals directly. Runs "
+                    "locally on the shop network — requires Tailscale to access."
+                ),
+                "url": "http://plex:8400/",
+                "badge": "Tailscale required",
+            },
+        ],
+    },
+    {
         "name": "Seagate",
         "tools": [
             {
@@ -249,31 +285,6 @@ SECTIONS = [
                 ),
                 "url": "https://wd-head-map-editor-fo3bdxohj8kya9merknaq7.streamlit.app/",
                 "badge": None,
-            },
-        ],
-    },
-    {
-        "name": "General",
-        "tools": [
-            {
-                "icon": "📋",
-                "title": "ACE Report Converter",
-                "desc": (
-                    "Converts ACE Lab reports into clean, customer-ready "
-                    "formatting with Slack upload built in."
-                ),
-                "url": "https://300ddr-acerep-proceappr-seqw4mzydzw7vh2uwnyt4t.streamlit.app/",
-                "badge": None,
-            },
-            {
-                "icon": "📖",
-                "title": "PC-3000 Manual Q&A",
-                "desc": (
-                    "Ask questions about the PC-3000 manuals directly. Runs "
-                    "locally on the shop network — requires Tailscale to access."
-                ),
-                "url": "http://plex:8400/",
-                "badge": "Tailscale required",
             },
         ],
     },
