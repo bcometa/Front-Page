@@ -1,19 +1,15 @@
 """
 $300 Data Recovery — Internal Tools Hub
-
 Single landing page that links to all internal Streamlit tools and the
 Tailscale-only PC-3000 manual Q&A server.
 """
-
 import streamlit as st
-
 st.set_page_config(
     page_title="$300 Data Recovery — Tools",
     page_icon="🛠️",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
-
 # ---------------------------------------------------------------------------
 # Custom CSS — 300DDR brand red on dark background
 # ---------------------------------------------------------------------------
@@ -24,18 +20,15 @@ st.markdown(
         #MainMenu { visibility: hidden; }
         footer { visibility: hidden; }
         header { visibility: hidden; }
-
         .stApp {
             background: #0d0d0d;
             color: #f5f5f5;
         }
-
         .block-container {
             padding-top: 2rem;
             padding-bottom: 4rem;
             max-width: 1180px;
         }
-
         /* Hero ---------------------------------------------------------- */
         .hero {
             text-align: center;
@@ -63,7 +56,6 @@ st.markdown(
             text-transform: uppercase;
             letter-spacing: 3px;
         }
-
         /* Cards --------------------------------------------------------- */
         .tool-card {
             position: relative;
@@ -131,7 +123,6 @@ st.markdown(
         .tool-btn:hover {
             filter: brightness(1.1);
         }
-
         /* Section headers ---------------------------------------------- */
         .section-header {
             display: flex;
@@ -162,14 +153,12 @@ st.markdown(
             color: #888;
             letter-spacing: 1.5px;
         }
-
         /* Responsive card grid ----------------------------------------- */
         .tool-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.25rem;
         }
-
         /* Footer -------------------------------------------------------- */
         .footer-note {
             text-align: center;
@@ -190,7 +179,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 # ---------------------------------------------------------------------------
 # Hero
 # ---------------------------------------------------------------------------
@@ -203,7 +191,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 # ---------------------------------------------------------------------------
 # Tool definitions — grouped by manufacturer
 # ---------------------------------------------------------------------------
@@ -231,6 +218,17 @@ SECTIONS = [
                 ),
                 "url": "https://300ddr-acerep-proceappr-seqw4mzydzw7vh2uwnyt4t.streamlit.app/",
                 "badge": None,
+            },
+            {
+                "icon": "📁",
+                "title": "File Listing Compactor",
+                "desc": (
+                    "Converts oversized UFS Explorer file-listing reports into "
+                    "compact standalone viewers for customers — browse, sort "
+                    "folders by size, and search right in the app."
+                ),
+                "url": "https://file-listing-compactor-qxsdoncjukknvdpvfrtmkm.streamlit.app/",
+                "badge": "Password",
             },
             {
                 "icon": "📖",
@@ -289,13 +287,11 @@ SECTIONS = [
         ],
     },
 ]
-
 # ---------------------------------------------------------------------------
 # Render — manufacturer sections + responsive card grid
 # ---------------------------------------------------------------------------
 def render_card(tool: dict) -> str:
     """Build a tool card as a single flat HTML string (no leading whitespace).
-
     Streamlit's markdown parser bails out of HTML-block mode on any
     whitespace-only line, so the entire card must be emitted without
     indentation or blank gaps.
@@ -312,8 +308,6 @@ def render_card(tool: dict) -> str:
         f'<a class="tool-btn" href="{tool["url"]}" target="_blank" rel="noopener">Open Tool →</a>'
         '</div>'
     )
-
-
 def render_section(section: dict) -> str:
     count = len(section["tools"])
     label = "tool" if count == 1 else "tools"
@@ -326,11 +320,8 @@ def render_section(section: dict) -> str:
         '</div>'
         f'<div class="tool-grid">{cards}</div>'
     )
-
-
 for section in SECTIONS:
     st.markdown(render_section(section), unsafe_allow_html=True)
-
 # ---------------------------------------------------------------------------
 # Footer
 # ---------------------------------------------------------------------------
