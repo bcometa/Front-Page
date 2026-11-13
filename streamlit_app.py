@@ -231,6 +231,17 @@ SECTIONS = [
                 "badge": "Password",
             },
             {
+                "icon": "🌉",
+                "title": "DDI ⇄ DE Map Bridge",
+                "desc": (
+                    "Move imaging progress between a DeepSpar DDI and a PC-3000 "
+                    "Data Extractor task, so a recovery started on one tool can "
+                    "resume on the other — without re-reading what already worked."
+                ),
+                "url": "https://ddi-to-de-6fyxocxaj5eshzqxypacbq.streamlit.app/",
+                "badge": None,
+            },
+            {
                 "icon": "📖",
                 "title": "PC-3000 Manual Q&A",
                 "desc": (
